@@ -5,7 +5,13 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const NavigationBar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch((error) => console.log(error));
+  };
 
   return (
     <Container>
@@ -21,7 +27,9 @@ const NavigationBar = () => {
             <Nav className="align-items-center">
               {user && <FaUserCircle style={{ fontSize: "2rem" }} />}
               {user ? (
-                <Button variant="secondary">Logout</Button>
+                <Button onClick={handleLogOut} variant="secondary">
+                  Logout
+                </Button>
               ) : (
                 <Link to="/login">
                   <Button variant="secondary">Login</Button>
